@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Ticket Form</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- <script src="/config.js"></script> -->
+    <!-- !ORIGINAL ONSUBMIT -->
+    <!-- <script>
+        function onSubmit(token) {
+            document.getElementById("ticket-form").submit();
+        }
+    </script> -->
+
+    <link rel="stylesheet" href="/styles.css?v=1.1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+</head>
+
+<body>
+    <form id="ticket-form" action="/submit" method="post">
+        <div>
+            <label for="name">Your Full Name<span class="red-asterisk">*</span></label><br>
+            <input type="text" id="name" name="name" required autocomplete="name"><br>
+            <label for="email">Email<span class="red-asterisk">*</span></label><br>
+            <input type="email" id="email" name="email" required placeholder="name@email.com" autocomplete="email"><br>
+            <p class="disclaimer">We'll never share your email with anyone else.</p>
+            <label for="company">Company Name</label><br>
+            <input type="text" id="company" name="company" autocomplete="organization"><br>
+            <label for="subject">Subject<span class="red-asterisk">*</span></label><br>
+            <input type="text" id="subject" name="subject" required autocomplete="off"><br>
+            <label for="description">Describe in detail what we can help you with.<span
+                    class="red-asterisk">*</span></label>
+            <textarea name="description" id="description" rows="3" required autocomplete="off"></textarea>
+            <p class="p-red">*Required Fields</p>
+        </div>
+        <div class="button-container">
+            <button class="g-recaptcha btn-shadow" data-sitekey="6LcD2AYqAAAAADVSswFbuw5vJr1MlYvNqTQe5FUj"
+                data-callback="onSubmit" data-size="invisible">Send Message</button>
+            <p id="error-message"></p>
+        </div>
+    </form>
+    <!-- ! -->
+    <script>
+        function onSubmit(token) {
+            const form = document.getElementById("ticket-form");
+            const errorMessage = document.getElementById("error-message");
+            // Clear any previous error messages
+            errorMessage.textContent = '';
+
+            // Check overall form validity, including required fields and email format
+            if (!form.checkValidity()) {
+                errorMessage.textContent = 'Please fill out all required fields correctly.';
+                grecaptcha.reset(); // Reset reCAPTCHA for a new attempt
+                return false; // Prevent form submission
+            }
+
+            form.submit(); // Only submit if all checks pass
+        }
+
+        document.getElementById('ticket-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Manually trigger reCAPTCHA verification
+            grecaptcha.execute();
+        });
+    </script>
+</body>
+
+</html>

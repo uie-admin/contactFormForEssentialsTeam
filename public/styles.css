@@ -1,0 +1,139 @@
+body {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid green; */
+    justify-content: center;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+
+
+form {
+    /* border: 3px solid black; */
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px;
+}
+
+form input {
+    width: 100%;
+    padding-bottom: 10px;
+    height: 25px;
+    margin-bottom: 20px;
+    border: 1px solid #CACACA;
+    border-radius: 5px;
+    font-size: 16px;
+
+}
+
+input::placeholder {
+    color: lightgray;
+    font-size: 1.2em;
+    /* Adjust the size to your preference */
+    transform: translateY(4px);
+    /* Moves the placeholder text down */
+    padding-left: 4px;
+}
+
+.disclaimer {
+    font-size: 12px;
+    margin-top: -15px;
+}
+
+form textarea {
+    width: 100%;
+    border: 1px solid #CACACA;
+    border-radius: 5px;
+    height: 80px;
+    font-family: sans-serif !important;
+
+    font-family: inherit;
+    font-size: 16px;
+
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+button {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: 2px solid black;
+    cursor: pointer;
+    width: 50%;
+    font-weight: 800;
+    font-size: 16px;
+    padding: 15px 20px;
+    margin: 1em;
+}
+
+/* button:hover {} */
+
+#error-message {
+    color: red;
+    display: block;
+}
+
+.p-red {
+    color: red;
+    margin-top: 0%;
+    font-size: 12px;
+
+}
+
+.btn-shadow {
+    box-shadow: 1px 1px 0px 0px rgb(8 8 8), -1px -1px 0px 0px rgb(8 8 8),
+        1px -1px 0px 0px rgb(0 0 0), -1px 1px 0px 0px rgb(0 0 0),
+        -6px 6px 0px 0px rgb(0 0 0);
+    -webkit-box-shadow: 1px 1px 0px 0px rgb(8 8 8), -1px -1px 0px 0px rgb(8 8 8),
+        1px -1px 0px 0px rgb(0 0 0), -1px 1px 0px 0px rgb(0 0 0),
+        -6px 6px 0px 0px rgb(0 0 0);
+    -moz-box-shadow: 1px 1px 0px 0px rgb(8, 8, 8), -1px -1px 0px 0px rgb(8, 8, 8),
+        1px -1px 0px 0px rgb(0, 0, 0), -1px 1px 0px 0px rgb(0, 0, 0),
+        -6px 6px 0px 0px rgba(0, 0, 0, 1);
+    position: relative;
+}
+
+.btn-shadow:hover {
+    box-shadow: 1px 1px 0px 0px rgb(8, 8, 8), -1px -1px 0px 0px rgb(8, 8, 8),
+        1px -1px 0px 0px rgb(0, 0, 0), -1px 1px 0px 0px rgb(0, 0, 0),
+        -3px 3px 0px 0px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: 1px 1px 0px 0px rgb(8, 8, 8),
+        -1px -1px 0px 0px rgb(8, 8, 8), 1px -1px 0px 0px rgb(0, 0, 0),
+        -1px 1px 0px 0px rgb(0, 0, 0), -3px 3px 0px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 1px 1px 0px 0px rgb(8, 8, 8), -1px -1px 0px 0px rgb(8, 8, 8),
+        1px -1px 0px 0px rgb(0, 0, 0), -1px 1px 0px 0px rgb(0, 0, 0),
+        -3px 3px 0px 0px rgba(0, 0, 0, 1);
+    top: 3px;
+    left: -3px;
+}
+
+.red-asterisk {
+    color: red;
+    font-size: 12px;
+}
+
+
+.success-message {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+    width: 400px;
+    height: 300px;
+    font-size: 16px;
+    margin: auto;
+    /* Center the div horizontally within its container */
+    text-align: center;
+    /* Center text inside the div */
+}
