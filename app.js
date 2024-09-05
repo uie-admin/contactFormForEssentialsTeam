@@ -6,7 +6,7 @@ const Recaptcha = require("express-recaptcha").RecaptchaV2;
 const path = require('path');
 
 const app = express();
-const port = 3333;
+const port = 3334;
 
 // Load environment variables
 const ZENDESK_SUBDOMAIN = process.env.ZENDESK_SUBDOMAIN;
@@ -28,6 +28,10 @@ app.get("/", (req, res) => {
 
 app.post("/submit", recaptcha.middleware.verify, async (req, res) => {
     if (!req.recaptcha.error) {
+        // Set default values or make the fields optional
+        const subject = req.body.subject || 'No Subject Provided';
+        const description = req.body.description || 'No Description Provided';
+
         const options = {
             method: "post",
             url: `https://${ZENDESK_SUBDOMAIN}.zendesk.com/api/v2/requests.json`,
@@ -40,9 +44,9 @@ app.post("/submit", recaptcha.middleware.verify, async (req, res) => {
             },
             data: {
                 request: {
-                    subject: req.body.subject,
+                    subject: subject,  // Use the default or provided subject
                     comment: {
-                        body: req.body.description
+                        body: description // Use the default or provided description
                     },
                     requester: {
                         name: req.body.name,
@@ -52,6 +56,14 @@ app.post("/submit", recaptcha.middleware.verify, async (req, res) => {
                         {
                             id: '9315317141019',
                             value: req.body.company
+                        },
+                        {
+                            id: '26548792763419',
+                            value: req.body.teamSize
+                        },
+                        {
+                            id: '28933005789851',
+                            value: req.body.product
                         }
                     ]
                 }
@@ -61,18 +73,17 @@ app.post("/submit", recaptcha.middleware.verify, async (req, res) => {
         try {
             const response = await axios(options);
             console.log("Zendesk response:", response.data);
-            console.log("Zendesk response stringified:", JSON.stringify(response.data, null, 2));
-            res.redirect('/formresponse.html')
+            res.redirect('/formresponse.html');
         } catch (error) {
             console.error("Error submitting to Zendesk:", error.response ? error.response.data : error.message);
             res.status(500).send("Error submitting to Zendesk");
-
         }
     } else {
         console.error("reCAPTCHA verification failed:", req.recaptcha.error);
         res.status(400).send("reCAPTCHA verification failed");
     }
 });
+
 
 
 
